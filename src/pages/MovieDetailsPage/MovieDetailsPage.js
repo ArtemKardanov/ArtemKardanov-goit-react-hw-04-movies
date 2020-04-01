@@ -1,10 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { Route, NavLink } from "react-router-dom";
 
 import MovieDetails from "../../components/MovieDetails/MovieDetails";
 import moviesApi from "../../services/moviesApi";
-import CastPage from "../CastPage/CastPage";
-import ReviewsPage from "../ReviewsPage/ReviewsPage";
+// import CastPage from "../CastPage/CastPage";
+// import ReviewsPage from "../ReviewsPage/ReviewsPage";
+
+const AsyncCastPage = lazy(() =>
+  import("../CastPage/CastPage" /* webpackChunkName: "cast-page" */)
+);
+const AsyncReviewsPage = lazy(() =>
+  import("../ReviewsPage/ReviewsPage" /* webpackChunkName: "reviews-page" */)
+);
 
 const getIdFromProps = props => props.match.params.movieId;
 
@@ -18,7 +25,12 @@ export default class MovieDetailsPage extends Component {
   }
 
   handleGoBack = () => {
-    const { history } = this.props;
+    const { history, location } = this.props;
+
+    if (location.state) {
+      return history.push(location.state.from);
+    }
+
     history.push("/");
   };
 
@@ -26,7 +38,7 @@ export default class MovieDetailsPage extends Component {
     const { movie } = this.state;
     const movieId = getIdFromProps(this.props);
     const { path } = this.props.match;
-
+    const { location } = this.props;
     return (
       <div>
         <button type="button" onClick={this.handleGoBack}>
@@ -38,16 +50,31 @@ export default class MovieDetailsPage extends Component {
           Additional information
           <ul>
             <li>
-              <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
+              <NavLink
+                to={{
+                  pathname: `/movies/${movieId}/cast`,
+                  state: { from: location }
+                }}
+              >
+                Cast
+              </NavLink>
             </li>
             <li>
-              <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
+              <NavLink
+                to={{
+                  pathname: `/movies/${movieId}/cast`,
+                  state: { from: location }
+                }}
+              >
+                Reviews
+              </NavLink>
             </li>
           </ul>
         </div>
-
-        <Route path={`${path}/cast`} component={CastPage} />
-        <Route path={`${path}/reviews`} component={ReviewsPage} />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Route path={`${path}/cast`} component={AsyncCastPage} />
+          <Route path={`${path}/reviews`} component={AsyncReviewsPage} />
+        </Suspense>
       </div>
     );
   }

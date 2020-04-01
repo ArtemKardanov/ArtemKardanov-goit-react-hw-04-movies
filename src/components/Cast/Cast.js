@@ -1,8 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Cast = ({ items }) => {
-  console.log(items);
-
   return (
     <>
       {items.map(item => (
@@ -14,6 +13,21 @@ const Cast = ({ items }) => {
       ))}
     </>
   );
+};
+
+Cast.defaultProps = {
+  alt: "actorImage"
+};
+
+Cast.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      cast_id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      character: PropTypes.string.isRequired,
+      poster_path: PropTypes.string
+    })
+  )
 };
 
 export default Cast;

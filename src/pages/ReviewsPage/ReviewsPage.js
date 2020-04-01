@@ -17,7 +17,6 @@ export default class ReviewsPage extends Component {
 
   render() {
     const { reviews } = this.state;
-    console.log(reviews);
 
     return (
       <div>
