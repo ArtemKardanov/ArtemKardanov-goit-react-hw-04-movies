@@ -1,0 +1,9 @@
+.article {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.img {
+  margin-right: 10px;
+}

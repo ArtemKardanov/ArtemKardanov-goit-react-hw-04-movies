@@ -3,8 +3,6 @@ import { Route, NavLink } from "react-router-dom";
 
 import MovieDetails from "../../components/MovieDetails/MovieDetails";
 import moviesApi from "../../services/moviesApi";
-// import CastPage from "../CastPage/CastPage";
-// import ReviewsPage from "../ReviewsPage/ReviewsPage";
 
 const AsyncCastPage = lazy(() =>
   import("../CastPage/CastPage" /* webpackChunkName: "cast-page" */)

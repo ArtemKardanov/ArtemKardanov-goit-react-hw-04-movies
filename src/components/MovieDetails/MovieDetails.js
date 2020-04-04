@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./MovieDetails.module.css";
 
 const Movie = ({ poster_path, title, overview, genres, release_date }) => (
   <>
-    <article>
-      <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
+    <article className={styles.article}>
+      <img
+        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        alt={title}
+        className={styles.img}
+      />
       <div>
         <h2>
           {title} ({release_date})
