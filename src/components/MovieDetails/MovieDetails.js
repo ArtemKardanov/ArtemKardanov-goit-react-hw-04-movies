@@ -6,11 +6,11 @@ const Movie = ({ poster_path, title, overview, genres, release_date }) => (
   <>
     <article className={styles.article}>
       <img
-        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
         alt={title}
         className={styles.img}
       />
-      <div>
+      <div className={styles.info}>
         <h2>
           {title} ({release_date})
         </h2>
@@ -18,7 +18,7 @@ const Movie = ({ poster_path, title, overview, genres, release_date }) => (
         <p>{overview}</p>
         <h3>Genres</h3>
         <ul>
-          {genres.map(genre => (
+          {genres.map((genre) => (
             <li key={genre.id}>{genre.name}</li>
           ))}
         </ul>
@@ -28,7 +28,7 @@ const Movie = ({ poster_path, title, overview, genres, release_date }) => (
 );
 
 Movie.defaultProps = {
-  alt: "poster"
+  alt: "poster",
 };
 
 Movie.propTypes = {
@@ -39,9 +39,9 @@ Movie.propTypes = {
   genres: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired,
     })
-  )
+  ),
 };
 
 export default Movie;

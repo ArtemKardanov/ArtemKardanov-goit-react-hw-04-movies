@@ -1,9 +1,14 @@
 .article {
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .img {
   margin-right: 10px;
+  width: 250px;
+}
+
+.info {
+  width: 300px;
 }

@@ -1,12 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./Cast.module.css";
 
 const Cast = ({ items }) => {
   return (
     <>
-      {items.map(item => (
+      {items.map((item) => (
         <li key={item.cast_id}>
-          <img src={`${item.poster_path}`} alt="" />
+          <img
+            src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
+            alt={item.name}
+            className={styles.img}
+          />
+
           <p>{item.name}</p>
           <p>Character: {item.character}</p>
         </li>
@@ -16,7 +22,7 @@ const Cast = ({ items }) => {
 };
 
 Cast.defaultProps = {
-  alt: "actorImage"
+  alt: "actorImage",
 };
 
 Cast.propTypes = {
@@ -25,9 +31,9 @@ Cast.propTypes = {
       cast_id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       character: PropTypes.string.isRequired,
-      poster_path: PropTypes.string
+      poster_path: PropTypes.string,
     })
-  )
+  ),
 };
 
 export default Cast;
