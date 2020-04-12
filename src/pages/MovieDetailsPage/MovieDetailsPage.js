@@ -11,7 +11,7 @@ const AsyncReviewsPage = lazy(() =>
   import("../ReviewsPage/ReviewsPage" /* webpackChunkName: "reviews-page" */)
 );
 
-const getIdFromProps = props => props.match.params.movieId;
+const getIdFromProps = (props) => props.match.params.movieId;
 
 export default class MovieDetailsPage extends Component {
   state = { movie: null };
@@ -19,7 +19,9 @@ export default class MovieDetailsPage extends Component {
   componentDidMount() {
     const movieId = getIdFromProps(this.props);
 
-    moviesApi.fetchMovieWithId(movieId).then(movie => this.setState({ movie }));
+    moviesApi
+      .fetchMovieWithId(movieId)
+      .then((movie) => this.setState({ movie }));
   }
 
   handleGoBack = () => {
@@ -51,7 +53,7 @@ export default class MovieDetailsPage extends Component {
               <NavLink
                 to={{
                   pathname: `/movies/${movieId}/cast`,
-                  state: { from: location }
+                  state: { from: location },
                 }}
               >
                 Cast
@@ -60,8 +62,8 @@ export default class MovieDetailsPage extends Component {
             <li>
               <NavLink
                 to={{
-                  pathname: `/movies/${movieId}/cast`,
-                  state: { from: location }
+                  pathname: `/movies/${movieId}/reviews`,
+                  state: { from: location },
                 }}
               >
                 Reviews
